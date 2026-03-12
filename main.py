@@ -9,6 +9,7 @@ print('''
     3. List Units
     4. Add Instance
     5. Remove Instance
+    6. Launch Unit
     q. Quit
 ''')
 while True:
@@ -67,6 +68,16 @@ while True:
             elif y not in units:
                 print("Not a valid unit.")
             break
+
+    elif x == "6":
+        while True:
+            y = input("Enter unit: ")
+            if y in units:
+                storage.launch_unit(y)
+                print(f"Unit {y} launched.")
+                break
+            else:
+                print(f"Unit {y} does not exist.")
 
     elif x == "q":
         sys.exit("Quitting Recur...")

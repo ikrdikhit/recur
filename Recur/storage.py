@@ -1,4 +1,5 @@
 import json
+import subprocess
 
 def save_unit(name):
     with open("units.json", "w") as f:
@@ -35,3 +36,9 @@ def remove_instance(unit, app):
     units = load_unit()
     units[unit]["instances"].remove(app)
     save_unit(units)
+
+def launch_unit(name):
+    units = load_unit()
+    unit = units[name]["instances"]
+    for i in unit:
+        subprocess.Popen(i.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

@@ -12,6 +12,8 @@ print('''
     6. Launch Unit
     q. Quit
 ''')
+
+
 while True:
     units = storage.load_unit()
     x = input("Enter (identifier): ")

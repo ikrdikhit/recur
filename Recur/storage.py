@@ -1,44 +1,57 @@
 import json
 import subprocess
 
-def save_unit(name):
-    with open("units.json", "w") as f:
-        json.dump(name, f)
 
-def load_unit():
+# GENERAL
+def save_units(units):
+    with open("units.json", "w") as f:
+        json.dump(units, f)
+
+def load_units():
     with open("units.json", "r") as f:
         return json.load(f)
 
-def load_instance(unit):
-    units = load_unit()
-    return units[unit]["instances"]
+def load_instances(unit_name):
+    units = load_units()
+    return units[unit_name]["instances"]
 
-def create_unit(name):
-    x = load_unit()
-    x[name] = {"instances": []}
-    save_unit(x)
 
-def delete_unit(name):
-    x = load_unit()
-    del x[name]
-    save_unit(x)
+# UNIT COMMAND
+def create_unit(unit_name):
+    units = load_units()
+    units[unit_name] = {"instances": []}
+    save_units(units)
+
+def delete_unit(unit_name):
+    units = load_units()
+    del units[name]
+    save_units(units)
 
 def list_units():
-    x = load_unit()
-    print(**x)
+    units = load_units()
+    print(**units)
 
-def add_instance(unit, app):
-    units = load_unit()
-    units[unit]["instances"].append(app)
-    save_unit(units)
 
-def remove_instance(unit, app):
-    units = load_unit()
-    units[unit]["instances"].remove(app)
-    save_unit(units)
+# INSTANCE COMMAND
+def add_instance(unit_name, instance_name):
+    units = load_units()
+    units[unit_name]["instances"].append(instance_name)
+    save_units(units)
 
-def launch_unit(name):
-    units = load_unit()
-    unit = units[name]["instances"]
-    for i in unit:
-        subprocess.Popen(i.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def remove_instance(unit_name, instance_name):
+    units = load_units()
+    units[unit_name]["instances"].remove(instance_name)
+    save_units(units)
+
+def list_instances(unit_name):
+    units = load_units()
+    instances = load_instances(unit_name)
+    print(**instances)
+
+
+# LAUNCH
+def launch_unit(unit_name):
+    units = load_units()
+    units = units[unit_name]["instances"]
+    for unit in units:
+        subprocess.Popen(unit.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

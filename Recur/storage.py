@@ -24,7 +24,7 @@ def create_unit(unit_name):
 
 def delete_unit(unit_name):
     units = load_units()
-    del units[name]
+    del units[unit_name]
     save_units(units)
 
 def list_units():
@@ -46,7 +46,8 @@ def remove_instance(unit_name, instance_name):
 def list_instances(unit_name):
     units = load_units()
     instances = load_instances(unit_name)
-    print(**instances)
+    for instance in instances:
+        print(instance)
 
 
 # LAUNCH

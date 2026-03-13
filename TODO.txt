@@ -1,0 +1,5 @@
+- beautify unit and instance lists 
+- add spontaneous units.json creation
+- add window management
+- add cross-identifier interactivity
+- 

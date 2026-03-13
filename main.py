@@ -4,87 +4,115 @@ import sys
 
 print('''
     === RECUR IS RUNNING ===
-    1. Create Units 
-    2. Delete Units
-    3. List Units
-    4. Add Instance
-    5. Remove Instance
-    6. Launch Unit
+    1. Create Unit
+    2. Add Instance
+    3. Delete Unit
+    4. Remove Instance
+    5. List Units
+    6. List Instances
+    7. Launch Unit
     q. Quit
 ''')
 
 
 while True:
-    units = storage.load_unit()
-    x = input("Enter (identifier): ")
+    identifier = input("Enter (identifier): ")
 
-    if x == "1":
+    # Create Unit
+    if identifier == "1":
+        units = storage.load_units()
         while True:
-            y = input("Enter unit name: ")
-            if y in units:
-                print(f"{y} already exists.")
+            unit = input("Unit to create: ")
+            if unit in units:
+                print(f"Unit {unit} already exists.")
                 continue
             else:
-                storage.create_unit(y)
-                sys.exit(f"{y} is created.")
-    
-    elif x == "2":
+                storage.create_unit(unit)
+                print(f"Unit {unit} is created.")
+                break
+
+    # Add Instance
+    elif identifier == "2":
+        units = storage.load_units()
         while True:
-            y = input("Enter unit name: ")
-            if not y in units:
-                print(f"{y} does not exists.")
+            unit = input("Unit name: ")
+            if unit in units: 
+                instance = input("Instance to add: ")
+                storage.add_instance(unit, instance)
+                print(f"Instance {instance} added to unit {unit}")
+                break
+            else:
+                print(f"Unit {unit} does not exist.")
                 continue
+
+    # Delete Unit
+    elif identifier == "3":
+        units = storage.load_units()
+        while True:
+            unit = input("Unit to delete: ")
+            if unit in units:
+                storage.delete_unit(unit)
+                print(f"Unit {unit} is deleted.")
+                break
             else: 
-                storage.delete_unit(y)
-                sys.exit(f"{y} is deleted.")
-    
-    elif x == "3":
+                print(f"Unit {unit} does not exist.")
+                continue
+
+    # Remove Instance
+    elif identifier == "4":
+        units = storage.load_units()
+        while True:
+            unit = input("Unit name: ")
+            if unit in units: 
+                instances = storage.load_instances(unit)
+                while True:
+                    instance = input("Instance to remove: ")
+                    if instance in instances:
+                        storage.remove_instance(unit, instance)
+                        print(f"Instance {instance} removed from unit {unit}")
+                        break
+                    else:
+                        print(f"Instance {instance} does not exist.")
+                        continue
+            else:
+                print(f"Unit {unit} does not exist.")
+                continue
+
+    # List Units
+    elif identifier == "5":
+        units = storage.load_units()
         print(list(units.keys()))
+
+    # List Instances
+    elif identifier == "6":
+        units = storage.load_units()
+        while True:
+            unit = input("Unit name: ")
+            if unit in units:
+                storage.list_instances(unit)
+                break
+            else:
+                print(f"Unit {unit} does not exist.")
+                continue
+
+    # Launch Unit
+    elif identifier == "7":
+        units = storage.load_units()
+        while True:
+            unit = input("Unit to launch: ")
+            if unit in units:
+                storage.launch_unit(unit)
+                print(f"Unit {unit} launched.")
+                break
+            else:
+                print(f"Unit {unit} does not exist.")
+                continue
+
+    # Quit
+    elif identifier == "q":
+        print("Quitting Recur...")
         break
 
-    # Add instance
-    elif x == "4":
-        while True:
-            y = input("Enter unit: ")
-            if y in units: 
-                z = input("Enter instance to add: ")
-                storage.add_instance(y, z)
-                print(f"Instance {z} added to unit {y}")
-                break
-            print("Not a valid unit.")
-            continue
-
-    # Remove instance
-    elif x == "5":
-        while True:
-            y = input("Enter unit: ")
-            if y in units: 
-                instances = storage.load_instance(y)
-                while True:
-                    z = input("Enter instance to remove: ")
-                    if z in instances:
-                        storage.remove_instance(y, z)
-                        print(f"Instance {z} removed from unit {y}")
-                        break
-                    print(f"Instance {z} does not exist.")
-            elif y not in units:
-                print("Not a valid unit.")
-            break
-
-    elif x == "6":
-        while True:
-            y = input("Enter unit: ")
-            if y in units:
-                storage.launch_unit(y)
-                print(f"Unit {y} launched.")
-                break
-            else:
-                print(f"Unit {y} does not exist.")
-
-    elif x == "q":
-        sys.exit("Quitting Recur...")
-    
+    # ...
     else:
         print("Please enter a correct identifier.")
-
-    break

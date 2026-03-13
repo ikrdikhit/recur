@@ -1,1 +1,1 @@
-{"unit1": {"instances": ["firefox"]}, "testunit": {"instances": ["firefox", "dolphin", "konsole", "okular"]}}
+{"testunit": {"instances": ["firefox", "dolphin", "konsole", "okular"]}}

@@ -1,5 +1,6 @@
 import json
 import subprocess
+import os
 
 
 # GENERAL
@@ -8,8 +9,12 @@ def save_units(units):
         json.dump(units, f)
 
 def load_units():
-    with open("units.json", "r") as f:
-        return json.load(f)
+    if os.path.exists("units.json"):
+        with open("units.json", "r") as f:
+            return json.load(f)
+    else:
+        save_units({})
+        return {}
 
 def load_instances(unit_name):
     units = load_units()
@@ -29,7 +34,7 @@ def delete_unit(unit_name):
 
 def list_units():
     units = load_units()
-    print(**units)
+    print(list(units.keys()))
 
 
 # INSTANCE COMMAND
@@ -56,3 +61,9 @@ def launch_unit(unit_name):
     units = units[unit_name]["instances"]
     for unit in units:
         subprocess.Popen(unit.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
+# FEATURES
+def tree_view():
+    units = load_units()
+    

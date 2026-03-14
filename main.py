@@ -1,5 +1,4 @@
 from Recur import storage
-import sys
 
 
 print('''
@@ -81,7 +80,7 @@ while True:
     # List Units
     elif identifier == "5":
         units = storage.load_units()
-        print(list(units.keys()))
+        storage.list_units()
 
     # List Instances
     elif identifier == "6":

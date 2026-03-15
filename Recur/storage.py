@@ -1,6 +1,8 @@
 import json
 import subprocess
 import os
+from rich.tree import Tree
+from rich.console import Console
 
 
 # GENERAL
@@ -34,7 +36,8 @@ def delete_unit(unit_name):
 
 def list_units():
     units = load_units()
-    print(list(units.keys()))
+    for unit in units:
+        print(unit)
 
 
 # INSTANCE COMMAND
@@ -66,4 +69,10 @@ def launch_unit(unit_name):
 # FEATURES
 def tree_view():
     units = load_units()
-    
+    console = Console()
+    tree = Tree("Recur")
+    for unit in units:
+        branch = tree.add(unit)
+        for instance in units[unit]["instances"]:
+            branch.add(instance)
+    console.print(tree)

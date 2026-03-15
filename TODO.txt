@@ -1,4 +1,4 @@
-- beautify unit and instance lists and introduce tree view
+-* beautify unit and instance lists and introduce tree view
 - add continuous instance and unit addition with back option
 -* add spontaneous units.json creation
 - add window management

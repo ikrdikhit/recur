@@ -123,3 +123,4 @@ As a simple program, Recur has several limitation. These limitations may or may 
 4. **Platforms:** Only Linux is natively supported. Windows and other platforms may be supported via individual editing.
 5. **No delay:** All instances in a unit launch simultaneously with no configurable delay in between.
 6. **No window management:** Instances that open windows have no control over positioning and size of the windows. They may be opened based on last position or size, individual device configuration, or any other basis.
+7. **No CLI arguments:** Control via CLI arguments is not available as of now. 

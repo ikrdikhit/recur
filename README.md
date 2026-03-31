@@ -63,20 +63,7 @@ git
 
 ### Recommended Installation
 
-#### 1. Update your system
-
-```bash
-# For Arch, Manjaro
-sudo pacman -Syu
-
-# For Debian, Ubuntu, Mint
-sudo apt update && sudo apt upgrade
-
-# For Fedora
-sudo dnf upgrade
-```
-
-#### 2. Clone and install
+#### 1. Clone and install
 
 ```bash
 # Clone the repository
@@ -87,7 +74,7 @@ cd recur
 pipx install .
 ```
 
-#### 3. Verify installation
+#### 2. Verify installation
 
 ```bash
 recur --version  # Check installation
